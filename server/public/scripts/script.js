@@ -4,13 +4,18 @@ $(document).ready(onReady);
 
 function onReady() {
     console.log('jquery czech');
+    $('#addNewSong').on('click', addNew);
+    getAllSongs();
+}
 
+function getAllSongs() {
     $.ajax({
         method: 'GET',
         url: '/records'
     })
         .then(function (response) {
             console.log(response);
+            $('#recordList').empty();
             response.forEach(function (record) {
                 $('#recordList').append(`<tr> 
                 <td>${record.title}</td>
@@ -19,9 +24,26 @@ function onReady() {
                 <td>${record.cost.toLocaleString('en', { style: 'currency', currency: 'USD' }).slice(0, -3)}</td> 
                 </tr>`);
             });
-            // for (let i = 0; i < response.length; i++) {
-            //     console.log(response[i]);
-            //     $('#recordList').append(`<li> ${response[i].title} by ${response[i].artist}, ${response[i].year} | $${response[i].cost} </li>`);
-            // }
+        });
+}
+
+
+function addNew() {
+    const newSong = {
+        title: $('#newSongTitle').val(),
+        artist: $('#newSongArtist').val(),
+        year: $('#newSongYear').val(),
+        cost: $('#newSongCost').val()
+    }
+    console.log('New Song object', newSong);
+
+    $.ajax({
+        method: 'POST',
+        url: '/add-record',
+        data: newSong
+    })
+        .then(function (response) {
+            console.log(response);
+            getAllSongs();
         });
 }

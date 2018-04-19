@@ -8,7 +8,7 @@ module.exports = [
     {
         title: 'Long Cleve Reed & Little Harvey Hill',
         year: 1927,
-        artist: 'Elvis',
+        artist: 'Long Cleve Reed & Little Harvey Hill',
         cost: 50000
     },
     {
