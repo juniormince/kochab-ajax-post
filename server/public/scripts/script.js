@@ -11,7 +11,7 @@ function onReady() {
 function getAllSongs() {
     $.ajax({
         method: 'GET',
-        url: '/records'
+        url: '/record'
     })
         .then(function (response) {
             console.log(response);
@@ -39,7 +39,7 @@ function addNew() {
 
     $.ajax({
         method: 'POST',
-        url: '/add-record',
+        url: '/record/add',
         data: newSong
     })
         .then(function (response) {
